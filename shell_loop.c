@@ -6,6 +6,7 @@ void loop(void)
   int status;
 
   do {
+    printf("$ ");
     line = read_line();
     args = arg_array(line);
     status = execute(args);

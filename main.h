@@ -5,8 +5,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <string.h>
-#include <stddef.h>
-#include <errno.h>
+#include <ctype.h>
 char **arg_array(char *line);
 char *read_line();
 int execute(char **args);
@@ -16,5 +15,4 @@ int lsh_help(char **args);
 int lsh_exit();
 int lsh_num_builtins();
 int shell_process(char **args);
-int mygetline(char **lineptr, size_t *n, FILE *stream);
 #endif 

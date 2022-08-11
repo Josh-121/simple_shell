@@ -1,102 +1,88 @@
-#include "main.h"
+#include "shell.h"
 /**
- * _strcmpdir - compares strings to find dir.
+ * _strcmp - compares two strings
+ * @s1: char pointer
+ * @s2: char pointer
  *
- * @s1: string.
- * @s2: string.
- *
- * Return: if match and any other number if otherwise.
- **/
-int _strcmpdir(char *s1, char *s2)
-{
-	int i = 0;
-
-	for (; (*s2 != '\0' && *s1 != '\0') && *s1 == *s2; s1++)
-	{
-		if (i == 3)
-			break;
-		i++;
-		s2++;
-	}
-
-	return (*s1 - *s2);
-}
-/**
- * charput - writes the character like putchar
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * _strcmp: compares two strings at the same spot on each string
+ * Return: positive, negative, or 0 if theyre the same
  */
-int charput(char c)
-{
-	return (write(1, &c, 1));
-}
-
-/**
- * place - similar to puts in C
- * @str: a pointer the integer we want to set to 402
- *
- * Return: int
- */
-void place(char *str)
-{
-	while (*str != '\0')
-	{
-		charput(*str);
-		str++;
-	}
-}
-
-/**
- * _strlen - Len string.
- * @str: My string.
- * Return: Length.
- */
-int _strlen(char *str)
+int _strcmp(char *s1, char *s2)
 {
 	int i;
 
-	for (i = 0; str[i] != '\0'; i++)
-		;
-
-	return (i);
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+		{
+			return (s1[i] - s2[i]);
+		}
+		i++;
+	}
+	return (s1[i] - s2[i]);
 }
-
 /**
- * str_concat - concatane strings.
- * @s1: string.
- * @s2: second string.
- * Return: strings.
+ * _strlen - counts the length of the string
+ * @str: string
+ * Return: length of the string
  */
-char *str_concat(char *s1, char *s2)
+size_t _strlen(char *str)
 {
-	char *a;
-	int lens1, lens2, j, i, e;
+	size_t length = 0;
 
-	if (s1 == NULL)
-		s1 = "";
+	while (*str++)
+		length++;
 
-	if (s2 == NULL)
-		s2 = "";
+	return (length);
+}
+/**
+ * _strcpy - string copy
+ * @dest: dest string
+ * @src: source string
+ * Return: string
+ */
+char *_strcpy(char *dest, char *src)
+{
+	char *ptr = dest;
 
-	lens1 = _strlen(s1);
+	while (*src)
+		*ptr++ = *src++;
+	*ptr = *src;
 
-	lens2 = _strlen(s2);
+	return (dest);
+}
+/**
+ * _strdup - string duplication
+ * @str: string
+ * Return: string
+ */
+char *_strdup(char *str)
+{
+	char *new;
 
-	a = malloc(((lens1) + (lens2) + 1) * sizeof(char));
-
-	if (a == NULL)
+	if (str == NULL)
 		return (NULL);
+	new = malloc(sizeof(char) * (_strlen(str) + 1));
+	if (new == NULL)
+		return (NULL);
+	_strcpy(new, str);
+	return (new);
+}
+/**
+ * _strcat - string concnat
+ * @dest: destination
+ * @src: source
+ * Return: concated string
+ */
+char *_strcat(char *dest, char *src)
+{
+	char *ptrs = dest;
 
-	for (j = 0; j < lens1; j++)
-	{
-		a[j] = s1[j];
-	}
-
-	for (i = lens1, e = 0; e <= lens2; i++, e++)
-	{
-		a[i] = s2[e];
-	}
-	return (a);
+	while (*ptrs)
+		ptrs++;
+	while (*src)
+		*ptrs++ = *src++;
+	*ptrs = 0;
+	return (dest);
 }

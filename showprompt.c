@@ -13,7 +13,7 @@ void prompt(void)
 		int status, lenbuf;
 		size_t bufsize = 0;
 
-		
+	        place("$ ");	
 		lenbuf = getline(&text, &bufsize, stdin);
 		if (lenbuf == -1)
 			exit(98);

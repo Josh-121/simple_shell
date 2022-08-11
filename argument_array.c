@@ -17,7 +17,7 @@ char **arg_array(char *line)
         exit(EXIT_FAILURE);
     }
 
-    while(isalpha(line[len]) != 0 || line[len] == '/')
+    while(isalpha(line[len]) != 0 || line[len] == '/' || line[len] == ' ' || line[len] == '-' || line[len] == '.' || line[len] == '*' || line[len] == ',' || line[len] == '|'|| line[len] == '&' || line[len] == '!' )
     {
         len++;
     }

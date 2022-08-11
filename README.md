@@ -1,3 +1,3 @@
-Description
+Usage
 
-simple_shell is a command line interpreter, or shell, in the tradition of the first Unix shell written by Ken Thompson in 1971. This shell is intentionally minimalistic, yet includes the basic functionality of a traditional Unix-like command line user interface. 
+The simple_shell is designed to execute commands in a similar manner to sh, however with more limited functionality. The development of this shell is ongoing.

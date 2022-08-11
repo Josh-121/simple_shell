@@ -1,30 +1,49 @@
 #include "main.h"
-int execute(char **args)
+/**
+ * execute_proc - similar to puts in C
+ * @cmd: a pointer the integer we want to set to 402
+ *
+ * Return: int
+ */
+void execute_proc(char **cmd)
 {
-  int i;
-  int (*builtin_func[]) (char **) = {
-  &lsh_cd,
-  &lsh_exit
-};
 
-char *builtin_str[] = {
-  "cd",
-  "exit"
-};
+	char *parametro = (*(cmd + 1));
+	char *s, *slash = "/";
+	char *o;
 
-  if (args[0] == NULL)
-  {
-    return 1;
-  }
-  
+	char *vartoprint = *cmd;
+	char *argv[4];
 
-  for (i = 0; i < lsh_num_builtins(); i++)
-  {
-    if (strcmp(args[0], builtin_str[i]) == 0)
-    {
-      return (*builtin_func[i])(args);
-    }
-  }
+	if ((access(cmd[0], F_OK) == 0))
+	{
+		argv[0] = cmd[0];
+		argv[1] = parametro;
+		argv[2] = ".";
+		argv[3] = NULL;
 
-  return shell_process(args);
+		if (execve(argv[0], argv, NULL) == -1)
+		{
+			perror("Error");
+		}
+	}
+	else
+	{
+		o = find_command(vartoprint);
+
+		slash = str_concat(o, slash);
+
+		s = str_concat(slash, *cmd);
+
+		argv[0] = s;
+		argv[1] = parametro;
+		argv[2] = ".";
+		argv[3] = NULL;
+
+		if (execve(argv[0], argv, NULL) == -1)
+		{
+			perror("Error");
+		}
+	}
 }
+

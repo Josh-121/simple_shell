@@ -16,6 +16,7 @@ char *builtin_str[] = {
   {
     return 1;
   }
+  
 
   for (i = 0; i < lsh_num_builtins(); i++)
   {

@@ -3,7 +3,7 @@ int shell_process(char **args)
 {
   pid_t pid;
   int status;
-
+  
   pid = fork();
   if (pid == 0)
   {
@@ -17,13 +17,7 @@ int shell_process(char **args)
   {
     perror("./hsh");
   }
-  else
-  {
-    do
-    {
-      waitpid(pid, &status, WUNTRACED);
-    }while (!WIFEXITED(status) && !WIFSIGNALED(status));
-  }
-
+  
+  waitpid(pid, &status, WUNTRACED);
   return 1;
 }
